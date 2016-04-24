@@ -1,0 +1,54 @@
+Next Word Prediction Data Science Capstone Project
+========================================================
+author: Barbara Poszewiecka
+date: 23-Apr-2016
+autosize: true
+
+Capstone Data Science Project
+========================================================
+
+The goal of this project was to write Shinny application that 
+as an input take a phrase (multiple words) and predicts the most probable next word.
+Students were given sample data from twitter, news and blogs (~ 0,5 GB).
+
+For this pourpose data was subset, cleaned and saved as  set of N-grams. N-grams (sequence of n consecutive word in a sentence) was used by predictive algorithm to predict next word. User interface was created using Shinny App.
+
+- [Shiny App URL] ( https://baskap.shinyapps.io/Capstone_Project/)
+- [Github Repo] (https://github.com/baskap/NextWordPrediction)
+
+Data Subsetting, Cleaning and Preprocessing
+========================================================
+
+- Data from three sources was marged and then randomly subset
+- Data was cleaned which involved: removing non printable characters, punctuation, numbers, 
+converting to lowercase and stripping whitespaces
+- 4-grams, 3-grams, 2-grams, 1-grams where generated and sorted by in order to find last words and their frequency fast 
+by implemented algorithm
+- List of four N-grams was saved as .rds file
+
+
+Prediction Algorithm - Katz Back-off alghoritm
+========================================================
+
+- Load list of four n-grams with their frequencies
+- Clean user input in the same way as data set
+- Excact last three words specified by user
+- Find most frequent 4-grams with the last three words of of the sentence
+- Append most frequent 3-grams with the last two words of the sentence
+- Append most frequent 2-grams with the last words of the sentence
+- Append 100 most frequent 1-grams 
+- Truncate result to 100 first unique words
+
+Shiny Application User Interface
+========================================================
+left: 35%
+
+![Shiny application user interface](shinny_app.png)
+
+***
+
+- User enter a phrase in text box 
+- Most probable predicted next word is displayed in the right panel
+- Next four most probable word are display in the right panel
+- At the bottom most probable words predicted by algorithm appears as word cloud plot (size of each word is proportional to its probability as a next word)
+- User can set number of words that appears in word cloud plot using slider
